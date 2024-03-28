@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\MapController;
+use App\Http\Controllers\PointController;
+use App\Http\Controllers\PolylineController;
+use App\Http\Controllers\PolygoneController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +18,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('/map', [MapController::class, 'map']) -> name('map');
+Route::get('/', [MapController::class, 'map']) -> name('map');
+Route::get('/table', [MapController::class, 'table']) -> name('table');
+
+//Create point
+Route::post('/store-point', [PointController::class, 'store']) -> name('store-point');
+Route::post('/store-polyline', [PolylineController::class, 'store']) -> name('store-polyline');
+Route::post('/store-polygone', [PolygoneController::class, 'store']) -> name('store-polygone');
+Route::get('/about', function () {
+    return view('about');
 });
 
 Route::get('/dashboard', function () {
